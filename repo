@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m "أول رفع للموقع"
+git remote add origin https://github.com/aboo34/ken-aamen.git
+git push -u origin main
+
