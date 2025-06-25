@@ -2,10 +2,39 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>كن آمِن</title>
+  <title>جلب بيانات الفوركس</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 50px; direction: rtl; }
+    input, button { padding: 10px; margin: 5px; font-size: 16px; }
+    #output { margin-top: 20px; white-space: pre-wrap; text-align: left; direction: ltr; background: #f9f9f9; padding: 15px; border-radius: 5px; }
+  </style>
 </head>
 <body>
-  <h1 style="text-align:center;">🚀 أهلاً بك عبود!</h1>
-  <p style="text-align:center;">موقعك شغّال ومربوط على GitHub Pages</p>
+  <h1>🔍 استعلام بيانات الفوركس</h1>
+  <input id="symbol" placeholder="مثلاً: EURUSD">
+  <input id="period" placeholder="مثلاً: 1h">
+  <input id="from" placeholder="مثلاً: 2024-01-01">
+  <br>
+  <button onclick="fetchData()">جلب البيانات</button>
+
+  <div id="output"></div>
+
+  <script>
+    async function fetchData() {
+      const symbol = document.getElementById('symbol').value;
+      const period = document.getElementById('period').value;
+      const from = document.getElementById('from').value;
+
+      const url = `http://localhost:3000/api/forex?symbol=${symbol}&period=${period}&from=${from}`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('output').textContent = '❌ خطأ في جلب البيانات';
+      }
+    }
+  </script>
 </body>
 </html>
